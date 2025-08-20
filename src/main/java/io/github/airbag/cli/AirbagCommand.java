@@ -19,6 +19,17 @@ public class AirbagCommand implements Runnable {
 
     public static void main(String[] args) {
         int exitCode = new CommandLine(new AirbagCommand()).execute(args);
-        System.exit(exitCode);
+        if (!hasGui(args)) {
+            System.exit(exitCode);
+        }
+    }
+
+    private static boolean hasGui(String[] args) {
+        for (String arg : args) {
+            if (arg.equals("--gui")) {
+                return true;
+            }
+        }
+        return false;
     }
 }
